@@ -11,13 +11,15 @@ type InteractivePlanProps = {
   selectedLot: Lot | null;
   onSelectLot: (lot: Lot | null) => void;
   onSchedule: () => void;
+  showLotDetails?: boolean;
 };
 
 export function InteractivePlan({
   lots,
   selectedLot,
   onSelectLot,
-  onSchedule
+  onSchedule,
+  showLotDetails = true
 }: InteractivePlanProps) {
   const [planImageReady, setPlanImageReady] = useState(false);
 
@@ -71,23 +73,42 @@ export function InteractivePlan({
         <div className="absolute left-3 top-3 rounded-md bg-white/95 px-3 py-2 text-xs font-semibold text-stone-700 shadow-sm">
           Tocá un solar para ver detalles
         </div>
+
+        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 rounded-md bg-white/95 p-2 text-[11px] font-bold text-stone-700 shadow-sm sm:right-auto">
+          <span className="inline-flex items-center gap-1">
+            <span className="h-3 w-3 rounded-sm border border-stone-500 bg-white" />
+            Disponible
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span className="h-3 w-3 rounded-sm border border-amber-500 bg-amber-200" />
+            Reservado
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span className="h-3 w-3 rounded-sm border border-amber-800 bg-amber-400" />
+            Vendido
+          </span>
+        </div>
       </div>
 
-      <div className="hidden md:block">
-        <LotBottomSheet
-          lot={selectedLot}
-          onClose={() => onSelectLot(null)}
-          onSchedule={onSchedule}
-        />
-      </div>
+      {showLotDetails ? (
+        <>
+          <div className="hidden md:block">
+            <LotBottomSheet
+              lot={selectedLot}
+              onClose={() => onSelectLot(null)}
+              onSchedule={onSchedule}
+            />
+          </div>
 
-      <div className="md:hidden">
-        <LotBottomSheet
-          lot={selectedLot}
-          onClose={() => onSelectLot(null)}
-          onSchedule={onSchedule}
-        />
-      </div>
+          <div className="md:hidden">
+            <LotBottomSheet
+              lot={selectedLot}
+              onClose={() => onSelectLot(null)}
+              onSchedule={onSchedule}
+            />
+          </div>
+        </>
+      ) : null}
     </section>
   );
 }

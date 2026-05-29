@@ -9,6 +9,7 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - Funcion central: plano interactivo + ficha de terreno + agenda de visitas + admin operativo.
 - Canal principal de contacto: WhatsApp.
 - Human-in-the-loop: el sistema prepara mensajes, pero no los envia automaticamente.
+- URL publica Vercel: https://aglir-propiedades.vercel.app
 
 ## 2. Stack real
 
@@ -37,6 +38,8 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - `plan/LotPolygon.tsx`
 - `plan/LotBottomSheet.tsx`
 - `visits/VisitRequestForm.tsx`
+- `admin/AdminLotStatusManager.tsx`
+- `admin/AdminLotStatusCard.tsx`
 - `admin/AdminVisitList.tsx`
 - `admin/AdminCalendarView.tsx`
 - `admin/WhatsAppAcceptButton.tsx`
@@ -62,9 +65,9 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - Estado actual: funcional con datos mock y placeholder si no existe `public/plan/plano-11223.png`.
 
 `/admin`
-- Funcion: panel operativo basico para revisar solicitudes de visita mock.
-- Componentes principales: `AdminCalendarView`, `AdminVisitList`, `WhatsAppAcceptButton`.
-- Estado actual: funcional con datos mock, sin login y sin persistencia real.
+- Funcion: panel operativo mobile-first para gestionar estados comerciales de terrenos y revisar solicitudes de visita mock.
+- Componentes principales: `AdminLotStatusManager`, `AdminLotStatusCard`, `AdminCalendarView`, `AdminVisitList`, `WhatsAppAcceptButton`.
+- Estado actual: funcional con datos mock/local, sin login y sin persistencia real.
 
 ## 5. Componentes existentes
 
@@ -93,6 +96,16 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - Datos que recibe: `initialRequests`, `lots`.
 - Responsabilidad: administrar estado local de solicitudes y exponer la accion de aceptar visita.
 
+`src/components/admin/AdminLotStatusManager.tsx`
+- Funcion: gestiona en admin el estado comercial local/mock de los terrenos.
+- Datos que recibe: `initialLots`.
+- Responsabilidad: mantener estado local de lotes, filtrar por manzana/solar y mostrar un plano admin que refleja disponible/reservado/vendido.
+
+`src/components/admin/AdminLotStatusCard.tsx`
+- Funcion: muestra cada terreno en una card mobile-first con precios, metros, estado y acciones rapidas.
+- Datos que recibe: `lot`, `onChangeStatus`.
+- Responsabilidad: permitir marcar un terreno como disponible, reservado o vendido desde botones grandes.
+
 `src/components/admin/AdminCalendarView.tsx`
 - Funcion: agrupa solicitudes por fecha y muestra una vista simple por dia.
 - Datos que recibe: `requests`, `lots`.
@@ -113,6 +126,11 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - `disponible`
 - `reservado`
 - `vendido`
+
+Regla visual de estados comerciales:
+- `disponible`: sin relleno fuerte, borde sutil.
+- `reservado`: amarillo claro.
+- `vendido`: amarillo mas intenso.
 
 `Lot`
 - `id`
@@ -162,6 +180,8 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - La imagen se renderiza como fondo mediante `next/image`.
 - Encima se superpone un SVG responsive.
 - Cada lote se renderiza como poligono clickeable.
+- El estado comercial del terreno es la fuente visual del poligono.
+- La leyenda muestra Disponible / Reservado / Vendido.
 - La seleccion de terreno actualiza `selectedLot`.
 - En mobile, la ficha aparece como bottom sheet.
 - El sistema esta preparado para agregar mas lotes editando `src/data/lots.ts`.
@@ -177,6 +197,9 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 ## 10. Admin
 
 - Ruta: `/admin`.
+- El Admin debe operar desde smartphone mediante cards y acciones rapidas.
+- Permite gestionar estados comerciales de terrenos en modo local/mock.
+- En esta fase los cambios son locales hasta conectar una base de datos.
 - Muestra solicitudes mock.
 - Incluye agrupacion por fecha/calendario simple.
 - Estados soportados: pendiente, aceptada, rechazada, realizada.

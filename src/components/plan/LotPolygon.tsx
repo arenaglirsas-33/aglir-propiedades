@@ -1,7 +1,7 @@
 "use client";
 
 import type { KeyboardEvent } from "react";
-import type { Lot } from "@/types";
+import type { Lot, LotStatus } from "@/types";
 
 type LotPolygonProps = {
   lot: Lot;
@@ -9,10 +9,10 @@ type LotPolygonProps = {
   onSelect: (lot: Lot) => void;
 };
 
-const statusStyles = {
-  disponible: "fill-emerald-500/35 stroke-emerald-700",
-  reservado: "fill-amber-400/40 stroke-amber-700",
-  vendido: "fill-slate-400/40 stroke-slate-600"
+const statusStyles: Record<LotStatus, string> = {
+  disponible: "fill-white/10 stroke-stone-600",
+  reservado: "fill-amber-200/55 stroke-amber-500",
+  vendido: "fill-amber-400/70 stroke-amber-800"
 };
 
 export function LotPolygon({ lot, selected, onSelect }: LotPolygonProps) {
@@ -38,10 +38,10 @@ export function LotPolygon({ lot, selected, onSelect }: LotPolygonProps) {
     >
       <polygon
         points={points}
-        className={`${statusStyles[lot.estado]} cursor-pointer transition duration-150 group-hover:fill-leaf/55 group-focus-visible:fill-leaf/55 ${
-          selected ? "fill-leaf/65 stroke-ink" : ""
+        className={`${statusStyles[lot.estado]} cursor-pointer transition duration-150 group-hover:stroke-ink group-focus-visible:stroke-ink ${
+          selected ? "stroke-ink" : ""
         }`}
-        strokeWidth={selected ? 1.1 : 0.7}
+        strokeWidth={selected ? 1.3 : 0.8}
         vectorEffect="non-scaling-stroke"
       />
       <polygon

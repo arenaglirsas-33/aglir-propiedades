@@ -1,4 +1,5 @@
 import { AdminCalendarView } from "@/components/admin/AdminCalendarView";
+import { AdminLotStatusManager } from "@/components/admin/AdminLotStatusManager";
 import { AdminVisitList } from "@/components/admin/AdminVisitList";
 import { lots } from "@/data/lots";
 import { visitRequests } from "@/data/visitRequests";
@@ -17,12 +18,13 @@ export default function AdminPage() {
 
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6">
         <section>
-          <h1 className="text-3xl font-black text-ink">Panel de visitas</h1>
+          <h1 className="text-3xl font-black text-ink">Panel admin</h1>
           <p className="mt-2 max-w-2xl text-stone-700">
             Revisión de solicitudes mock y preparación manual de mensajes por WhatsApp.
           </p>
         </section>
 
+        <AdminLotStatusManager initialLots={lots} />
         <AdminCalendarView requests={visitRequests} lots={lots} />
         <AdminVisitList initialRequests={visitRequests} lots={lots} />
       </div>
