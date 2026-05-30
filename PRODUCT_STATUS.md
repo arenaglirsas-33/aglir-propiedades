@@ -6,6 +6,7 @@ Estados permitidos: Closed / Partial / UI-only / Deferred / Broken / Needs Revie
 | --- | --- | --- | --- | --- |
 | Proyecto base | Next.js + TypeScript + Tailwind + App Router | Closed | Next.js + build OK + commit inicial `44be750` | Mantener build antes de cada push |
 | Deploy | Vercel production deployment | Closed | https://aglir-propiedades.vercel.app | Colocar plano real y conectar futuras features |
+| Metadata de terrenos | Dataset inicial Manzana/Solar/Area m2 | Partial | `src/data/lots.ts` contiene lotes auditados de manzanas 2, 3, 6, 8 y 9 | Auditar manzanas 1, 4, 5 y 7; trazar poligonos definitivos; cargar precios reales |
 | Pagina publica `/` | Experiencia publica de terrenos | Partial | Ruta existente y funcional | Plano real, poligonos reales, precios reales |
 | Plano interactivo | Plano con poligonos clickeables | Partial | Componente `InteractivePlan` + datos mock | Colocar plano real y trazar terrenos definitivos |
 | Plano interactivo | Visualizacion por estado comercial | Partial | Poligonos reflejan disponible/reservado/vendido | Plano real, trazado definitivo y persistencia |

@@ -22,6 +22,7 @@ export function InteractivePlan({
   showLotDetails = true
 }: InteractivePlanProps) {
   const [planImageReady, setPlanImageReady] = useState(false);
+  const drawableLots = lots.filter((lot) => lot.polygon.length >= 3);
 
   useEffect(() => {
     const image = new window.Image();
@@ -60,7 +61,7 @@ export function InteractivePlan({
           role="img"
           aria-label="Plano interactivo con terrenos clickeables"
         >
-          {lots.map((lot) => (
+          {drawableLots.map((lot) => (
             <LotPolygon
               key={lot.id}
               lot={lot}

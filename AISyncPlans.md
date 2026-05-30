@@ -45,7 +45,7 @@ Nota de protocolo: el nombre `AISyncPlans.md` se conserva como archivo tecnico e
 - `admin/WhatsAppAcceptButton.tsx`
 
 `src/data`
-- `lots.ts`: terrenos mock.
+- `lots.ts`: metadata real parcial de terrenos auditados desde el plano.
 - `visitRequests.ts`: solicitudes de visita mock.
 
 `src/lib`
@@ -159,14 +159,16 @@ Regla visual de estados comerciales:
 - `comentario`
 - `estado`
 
-## 7. Datos mock
+## 7. Datos de terrenos
 
 `src/data/lots.ts`
-- Contiene 6 terrenos iniciales de ejemplo.
-- Son datos de prueba.
-- No son precios definitivos.
-- No representan todavia todos los terrenos.
-- Los poligonos son trazado inicial/manual sobre un `viewBox` SVG `0 0 100 100`.
+- Contiene dataset real parcial cargado desde el plano del padron 11223.
+- Manzanas cargadas: 2, 3, 6, 8 y 9.
+- Todos los lotes cargados quedan inicialmente como `disponible`.
+- Manzana 9 Solar 6 no se carga porque figura como E. LIBRE, no como lote comun de venta.
+- Manzanas 1, 4, 5 y 7 quedan pendientes de auditoria de areas.
+- No hay precios reales cargados; `precio_contado` y `precio_financiado` usan `0` como placeholder tecnico.
+- Los poligonos definitivos estan pendientes; los lotes auditados usan `polygon: []` hasta el trazado.
 
 `src/data/visitRequests.ts`
 - Contiene 4 solicitudes mock.
@@ -182,6 +184,7 @@ Regla visual de estados comerciales:
 - Cada lote se renderiza como poligono clickeable.
 - El estado comercial del terreno es la fuente visual del poligono.
 - La leyenda muestra Disponible / Reservado / Vendido.
+- Los lotes sin poligono valido no se dibujan sobre el SVG hasta ser trazados.
 - La seleccion de terreno actualiza `selectedLot`.
 - En mobile, la ficha aparece como bottom sheet.
 - El sistema esta preparado para agregar mas lotes editando `src/data/lots.ts`.

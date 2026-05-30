@@ -1,100 +1,74 @@
 import type { Lot } from "@/types";
 
-export const lots: Lot[] = [
-  {
-    id: "m1-s1",
-    manzana: "1",
-    solar: "1",
-    area_m2: 420,
-    precio_contado: 24500,
-    precio_financiado: 28500,
-    estado: "disponible",
-    observaciones: "Frente amplio, buen acceso desde calle principal.",
-    polygon: [
-      { x: 12, y: 20 },
-      { x: 29, y: 18 },
-      { x: 31, y: 34 },
-      { x: 14, y: 36 }
-    ]
-  },
-  {
-    id: "m1-s2",
-    manzana: "1",
-    solar: "2",
-    area_m2: 405,
-    precio_contado: 23800,
-    precio_financiado: 27800,
-    estado: "disponible",
-    observaciones: "Ubicado cerca del ingreso al fraccionamiento.",
-    polygon: [
-      { x: 31, y: 18 },
-      { x: 48, y: 17 },
-      { x: 49, y: 33 },
-      { x: 32, y: 34 }
-    ]
-  },
-  {
-    id: "m1-s3",
-    manzana: "1",
-    solar: "3",
-    area_m2: 390,
-    precio_contado: 22600,
-    precio_financiado: 26700,
-    estado: "reservado",
-    observaciones: "Reserva en curso, consultar disponibilidad.",
-    polygon: [
-      { x: 50, y: 17 },
-      { x: 66, y: 18 },
-      { x: 65, y: 34 },
-      { x: 50, y: 33 }
-    ]
-  },
-  {
-    id: "m2-s4",
-    manzana: "2",
-    solar: "4",
-    area_m2: 450,
-    precio_contado: 25500,
-    precio_financiado: 29900,
-    estado: "disponible",
-    observaciones: "Solar esquina con orientación favorable.",
-    polygon: [
-      { x: 16, y: 50 },
-      { x: 34, y: 48 },
-      { x: 36, y: 65 },
-      { x: 17, y: 67 }
-    ]
-  },
-  {
-    id: "m2-s5",
-    manzana: "2",
-    solar: "5",
-    area_m2: 430,
-    precio_contado: 24900,
-    precio_financiado: 29200,
-    estado: "disponible",
-    observaciones: "Terreno regular, apto para vivienda familiar.",
-    polygon: [
-      { x: 37, y: 48 },
-      { x: 54, y: 47 },
-      { x: 55, y: 64 },
-      { x: 37, y: 65 }
-    ]
-  },
-  {
-    id: "m2-s6",
-    manzana: "2",
-    solar: "6",
-    area_m2: 410,
-    precio_contado: 23200,
-    precio_financiado: 27400,
-    estado: "vendido",
-    observaciones: "Vendido. Se mantiene como referencia visual.",
-    polygon: [
-      { x: 56, y: 47 },
-      { x: 72, y: 49 },
-      { x: 71, y: 66 },
-      { x: 56, y: 64 }
-    ]
-  }
-];
+const auditedLotRows = [
+  ["2", "6", 408.01],
+  ["2", "7", 405.99],
+  ["2", "8", 405.99],
+  ["2", "9", 405.99],
+  ["2", "10", 402],
+  ["2", "11", 402],
+  ["2", "12", 405],
+  ["2", "13", 405],
+  ["2", "14", 400.52],
+  ["2", "15", 405.12],
+  ["2", "16", 405.12],
+  ["2", "17", 405.12],
+  ["2", "18", 407.15],
+  ["3", "6", 748.47],
+  ["3", "7", 748.7],
+  ["3", "8", 527.95],
+  ["3", "9", 528],
+  ["3", "10", 528],
+  ["3", "11", 528],
+  ["3", "12", 628.98],
+  ["6", "1", 538.55],
+  ["6", "2", 450],
+  ["6", "3", 450],
+  ["6", "4", 450],
+  ["6", "5", 450],
+  ["6", "6", 750.9],
+  ["6", "7", 750.96],
+  ["6", "8", 751.2],
+  ["6", "9", 751.44],
+  ["6", "10", 751.68],
+  ["6", "11", 751.92],
+  ["6", "12", 752.16],
+  ["6", "13", 752.4],
+  ["6", "14", 752.64],
+  ["6", "15", 450],
+  ["6", "16", 450],
+  ["6", "17", 450],
+  ["6", "18", 450],
+  ["6", "19", 547.14],
+  ["8", "4", 403.8],
+  ["8", "5", 403.8],
+  ["8", "6", 403.8],
+  ["8", "7", 403.8],
+  ["8", "8", 403.8],
+  ["8", "9", 403.8],
+  ["8", "10", 403.8],
+  ["8", "11", 400.67],
+  ["8", "12", 400.92],
+  ["8", "13", 401.16],
+  ["8", "14", 401.4],
+  ["8", "15", 401.58],
+  ["8", "16", 401.76],
+  ["8", "17", 402.03],
+  ["9", "1", 594.25],
+  ["9", "2", 485.04],
+  ["9", "3", 485.04],
+  ["9", "4", 485.04],
+  ["9", "5", 485.04]
+] as const;
+
+export const lots: Lot[] = auditedLotRows.map(([manzana, solar, area_m2]) => ({
+  id: `m${manzana}-s${solar}`,
+  manzana,
+  solar,
+  area_m2,
+  precio_contado: 0,
+  precio_financiado: 0,
+  estado: "disponible",
+  observaciones: "Metadata auditada desde plano. Poligono pendiente de trazado.",
+  polygon: []
+}));

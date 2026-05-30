@@ -76,3 +76,50 @@ Implementacion de gestion mobile/local de estados comerciales:
 - Colocar plano real en `public/plan/plano-11223.png`.
 - Trazar terrenos reales y cargar precios reales.
 - Probar flujo en smartphone real.
+
+## 2026-05-30 - Carga de metadata real parcial de lotes
+
+### Contexto
+
+Se cargo la metadata Manzana / Solar / Area m2 auditada desde el plano del padron 11223 para que la ficha publica, el Admin y el futuro vinculo con poligonos consuman datos estructurados.
+
+### Estado previo
+
+`src/data/lots.ts` contenia pocos lotes mock con precios de ejemplo y algunos poligonos iniciales. La metadata real por manzana y solar todavia no estaba cargada.
+
+### Accion ejecutada
+
+Reemplazo de los datos mock por 58 lotes auditados:
+
+- Manzana 2: solares 6 a 18.
+- Manzana 3: solares 6 a 12.
+- Manzana 6: solares 1 a 19.
+- Manzana 8: solares 4 a 17.
+- Manzana 9: solares 1 a 5.
+
+Todos los lotes quedaron inicialmente como `disponible`, con precios en `0` como placeholder tecnico y observacion de metadata auditada con poligono pendiente.
+
+### Exclusiones
+
+- Manzana 9 Solar 6 no se cargo porque figura como E. LIBRE.
+- Manzanas 1, 4, 5 y 7 quedan pendientes porque sus areas no estan suficientemente auditadas en esta etapa.
+
+### Archivos tocados
+
+- `src/data/lots.ts`
+- `src/components/plan/InteractivePlan.tsx`
+- `AISyncPlans.md`
+- `PRODUCT_STATUS.md`
+- `handoff.md`
+- `DECISIONS.md`
+
+### Commit
+
+`Load audited lot metadata from plan`
+
+### Pendientes
+
+- Auditar manzanas 1, 4, 5 y 7.
+- Trazar poligonos definitivos y vincularlos a ids estables.
+- Cargar precios reales.
+- Persistir metadata en base de datos futura.

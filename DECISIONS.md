@@ -33,3 +33,17 @@ Los estados visuales del plano son:
 ### Motivo
 
 Permite lectura comercial rapida sin sobrecargar el plano.
+
+## 2026-05-30 - Metadata estructurada por lote
+
+### Decision
+
+La metadata Manzana / Solar / Area m2 se gestiona como datos estructurados por lote, no como texto leido desde la imagen del plano.
+
+### Motivo
+
+El usuario accede desde smartphone y al tocar un lote debe recibir informacion confiable sin depender de la legibilidad visual del plano.
+
+### Consecuencia
+
+Cada poligono del plano debera vincularse a un id de lote estable. La ficha publica y el Admin consumen metadata desde `src/data/lots.ts` y, en el futuro, desde base de datos.
